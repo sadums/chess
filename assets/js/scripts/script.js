@@ -13,7 +13,7 @@ class Tile{
         this.rank = rank;
         this.color = color;
         this.element = element;
-        tiles.put(file + rank, this);
+        tiles.set(file + rank, this);
     }
 }
 
@@ -28,4 +28,7 @@ for(let i = 0; i < 64; i++){
     element.setAttribute('id', file + rank);
     element.setAttribute('style', `width: ${squareWidth}px; height: ${squareWidth}px; background-color: ${color}`);
     chessBoardElement.prepend(element);
+
+    new Tile(file, rank, color, element);
 }
+console.log(tiles);
