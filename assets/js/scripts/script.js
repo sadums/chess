@@ -32,3 +32,83 @@ for(let i = 0; i < 64; i++){
     new Tile(file, rank, color, element);
 }
 console.log(tiles);
+
+// Piece Classes
+
+class Piece{
+    constructor(color){
+        this.color = color;
+    }
+    capture(){
+
+    }
+    captured(){
+
+    }
+}
+
+class King extends Piece{
+    constructor(color){
+        super(color);
+        this.imgPath = () => {
+            if(color === 'white') return './assets/images/wk.png';
+            return './assets/images/bk.png';
+        }
+    }
+}
+
+class Queen extends Piece{
+    constructor(color){
+        super(color);
+        this.imgPath = () => {
+            if(color === 'white') return './assets/images/wq.png';
+            return './assets/images/bq.png';
+        }
+    }
+}
+
+class Rook extends Piece{
+    constructor(color){
+        super(color);
+        this.imgPath = () => {
+            if(color === 'white') return './assets/images/wr.png';
+            return './assets/images/br.png';
+        }
+    }
+}
+
+class Bishop extends Piece{
+    constructor(color){
+        super(color);
+        this.imgPath = () => {
+            if(color === 'white') return './assets/images/wb.png';
+            return './assets/images/bb.png';
+        }
+    }
+}
+
+class Knight extends Piece{
+    constructor(color){
+        super(color);
+        this.imgPath = () => {
+            if(color === 'white') return './assets/images/wn.png';
+            return './assets/images/bn.png';
+        }
+    }
+}
+
+class Pawn extends Piece{
+    constructor(color){
+        super(color);
+        this.imgPath = () => {
+            if(color === 'white') return './assets/images/wp.png';
+            return './assets/images/bp.png';
+        }
+    }
+
+    promotes(){
+
+    }
+}
+
+
