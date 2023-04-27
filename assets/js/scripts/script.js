@@ -40,9 +40,9 @@ console.log(tiles);
 // Piece Classes
 
 class Piece{
-    constructor(color, element){
+    constructor(color, startingTile){
         this.color = color;
-        this.element = element;
+        this.startingTile = startingTile;
     }
     capture(){
 
@@ -53,63 +53,110 @@ class Piece{
 }
 
 class King extends Piece{
-    constructor(color, element){
-        super(color, element);
-    }
-    imgPath(){
-        if(this.color === 'white') return './assets/images/wk.png';
-        return './assets/images/bk.png';
+    constructor(color, startingTile){
+        super(color, startingTile);
+        this.init = function(){
+            if(this.color === 'white'){
+                whitePieces.push(this);
+                return './assets/images/wk.png';
+            } 
+            blackPieces.push(this);
+            return './assets/images/bk.png';
+        }
+        this.element = document.createElement('img');
+        this.element.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
+        this.element.setAttribute('src', this.init());
+        this.startingTile.element.append(this.element);
     }
 }
 
 class Queen extends Piece{
-    constructor(color, element){
-        super(color, element);
-    }
-    imgPath(){
-        if(this.color === 'white') return './assets/images/wq.png';
-        return './assets/images/bq.png';
+    constructor(color, startingTile){
+        super(color, startingTile);
+        this.init = function(){
+            if(this.color === 'white'){
+                whitePieces.push(this);
+                return './assets/images/wq.png';
+            } 
+            blackPieces.push(this);
+            return './assets/images/bq.png';
+        }
+        this.element = document.createElement('img');
+        this.element.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
+        this.element.setAttribute('src', this.init());
+        this.startingTile.element.append(this.element);
     }
 }
 
 class Rook extends Piece{
-    constructor(color, element){
-        super(color,element);
-    }
-    imgPath(){
-        if(this.color === 'white') return './assets/images/wr.png';
-        return './assets/images/br.png';
+    constructor(color, startingTile){
+        super(color, startingTile);
+        this.init = function(){
+            if(this.color === 'white'){
+                whitePieces.push(this);
+                return './assets/images/wr.png';
+            } 
+            blackPieces.push(this);
+            return './assets/images/br.png';
+        }
+        this.element = document.createElement('img');
+        this.element.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
+        this.element.setAttribute('src', this.init());
+        this.startingTile.element.append(this.element);
     }
 }
 
 class Bishop extends Piece{
-    constructor(color, element){
-        super(color, element);
-    }
-    imgPath(){
-        if(this.color === 'white') return './assets/images/wb.png';
-        return './assets/images/bb.png';
+    constructor(color, startingTile){
+        super(color, startingTile);
+        this.init = function(){
+            if(this.color === 'white'){
+                whitePieces.push(this);
+                return './assets/images/wb.png';
+            } 
+            blackPieces.push(this);
+            return './assets/images/bb.png';
+        }
+        this.element = document.createElement('img');
+        this.element.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
+        this.element.setAttribute('src', this.init());
+        this.startingTile.element.append(this.element);
     }
 }
 
 class Knight extends Piece{
-    constructor(color, element){
-        super(color, element);
-    }
-    imgPath(){
-        if(this.color === 'white') return './assets/images/wn.png';
-        return './assets/images/bn.png';
+    constructor(color, startingTile){
+        super(color, startingTile);
+        this.init = function(){
+            if(this.color === 'white'){
+                whitePieces.push(this);
+                return './assets/images/wn.png';
+            } 
+            blackPieces.push(this);
+            return './assets/images/bn.png';
+        }
+        this.element = document.createElement('img');
+        this.element.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
+        this.element.setAttribute('src', this.init());
+        this.startingTile.element.append(this.element);
     }
 }
 
 class Pawn extends Piece{
-    constructor(color, element){
-        super(color, element);
-    }
-    
-    imgPath(){
-        if(this.color === 'white') return './assets/images/wp.png';
-        return './assets/images/bp.png';
+    constructor(color, startingTile){
+        super(color, startingTile);
+        this.init = function(){
+            if(this.color === 'white'){
+                whitePieces.push(this);
+                return './assets/images/wp.png';
+            } 
+            blackPieces.push(this);
+            return './assets/images/bp.png';
+        }
+        this.element = document.createElement('img');
+        this.element.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
+        this.element.setAttribute('src', this.init());
+        this.startingTile.element.append(this.element);
     }
     promotes(){
 
@@ -122,24 +169,26 @@ const start = function(){
     // create and place black pawns
     // create and place white pawns
     letters.forEach( (file) => {
-        let blackPawnTile = tiles.get(`${file}7`).element;
-        let blackPawnElement = document.createElement('img');
-        let whitePawnTile = tiles.get(`${file}2`).element;
-        let whitePawnElement = document.createElement('img');
-        blackPawnElement.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
-        whitePawnElement.setAttribute('style', 'z-index: 2; display: block; margin-left: auto; margin-right: auto; width: 100%');
-        let blackPawn = new Pawn('black', blackPawnElement);
-        let whitePawn = new Pawn('white', whitePawnElement);
-        blackPawnElement.setAttribute('src', blackPawn.imgPath());
-        whitePawnElement.setAttribute('src', whitePawn.imgPath());
-        blackPawnTile.append(blackPawnElement);
-        whitePawnTile.append(whitePawnElement);
-        whitePieces.push(whitePawn);
-        blackPieces.push(blackPawn);
+        new Pawn('black', tiles.get(`${file}7`));
+        new Pawn('white', tiles.get(`${file}2`));
     });
     // create and place black pieces
-    
+    new Rook('black', tiles.get('a8'));
+    new Knight('black', tiles.get('b8'));
+    new Bishop('black', tiles.get('c8'));
+    new Queen('black', tiles.get('d8'));
+    new King('black', tiles.get('e8'));
+    new Bishop('black', tiles.get('f8'));
+    new Knight('black', tiles.get('g8'));
+    new Rook('black', tiles.get('h8'));
     // create and place black pieces
-
+    new Rook('white', tiles.get('a1'));
+    new Knight('white', tiles.get('b1'));
+    new Bishop('white', tiles.get('c1'));
+    new Queen('white', tiles.get('d1'));
+    new King('white', tiles.get('e1'));
+    new Bishop('white', tiles.get('f1'));
+    new Knight('white', tiles.get('g1'));
+    new Rook('white', tiles.get('h1'));
 }
 start();
